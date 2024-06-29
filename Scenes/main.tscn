@@ -1,0 +1,132 @@
+[gd_scene load_steps=17 format=3 uid="uid://ckf0otfkfgprt"]
+
+[ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_6yfwx"]
+[ext_resource type="Texture2D" uid="uid://dc0oft0kw8mgp" path="res://Assets/background.png" id="1_42j2x"]
+[ext_resource type="Script" path="res://Scripts/ground.gd" id="2_rqcd1"]
+[ext_resource type="PackedScene" uid="uid://cy665aspnmmio" path="res://Scenes/player.tscn" id="2_uxmqi"]
+[ext_resource type="Texture2D" uid="uid://dk8ihfgdd7p8h" path="res://Assets/RedPlayer.png" id="3_ilb7t"]
+[ext_resource type="Texture2D" uid="uid://lyswvdwgj5jb" path="res://Assets/BluePlayer.png" id="3_lvkno"]
+[ext_resource type="PackedScene" uid="uid://cgbno3bx0wafk" path="res://Scenes/score_ui.tscn" id="7_76ydp"]
+[ext_resource type="PackedScene" uid="uid://b5q571po1vtxy" path="res://Scenes/pause_menu.tscn" id="8_u0llj"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ok0fn"]
+friction = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qm12s"]
+size = Vector2(196.75, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptpie"]
+size = Vector2(196, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ppsgd"]
+size = Vector2(8, 128)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_d64ev"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jy31i"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ogvfb"]
+normal = Vector2(0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_35xsv"]
+size = Vector2(8, 112)
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("blue_spawn", "red_spawn", "score", "pause_menu")]
+process_mode = 3
+script = ExtResource("1_6yfwx")
+blue_spawn = NodePath("Enviroment/BlueSpawn")
+red_spawn = NodePath("Enviroment/RedSpawn")
+score = NodePath("CanvasLayer/ScoreUI")
+pause_menu = NodePath("CanvasLayer/PauseMenu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="ScoreUI" parent="CanvasLayer" instance=ExtResource("7_76ydp")]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("8_u0llj")]
+visible = false
+
+[node name="Enviroment" type="Node" parent="."]
+process_mode = 1
+
+[node name="RedGround" type="StaticBody2D" parent="Enviroment"]
+position = Vector2(103, 121)
+physics_material_override = SubResource("PhysicsMaterial_ok0fn")
+script = ExtResource("2_rqcd1")
+player = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enviroment/RedGround"]
+position = Vector2(-0.625, 0)
+shape = SubResource("RectangleShape2D_qm12s")
+
+[node name="BlueGround" type="StaticBody2D" parent="Enviroment"]
+position = Vector2(-102, 121)
+physics_material_override = SubResource("PhysicsMaterial_ok0fn")
+script = ExtResource("2_rqcd1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enviroment/BlueGround"]
+shape = SubResource("RectangleShape2D_ptpie")
+
+[node name="Net" type="StaticBody2D" parent="Enviroment"]
+physics_material_override = SubResource("PhysicsMaterial_ok0fn")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Enviroment/Net"]
+position = Vector2(0, 56)
+shape = SubResource("RectangleShape2D_ppsgd")
+
+[node name="LeftWall" type="StaticBody2D" parent="Enviroment"]
+physics_material_override = SubResource("PhysicsMaterial_ok0fn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enviroment/LeftWall"]
+position = Vector2(-202, 0)
+shape = SubResource("WorldBoundaryShape2D_d64ev")
+
+[node name="RightWall" type="StaticBody2D" parent="Enviroment"]
+position = Vector2(202, 0)
+physics_material_override = SubResource("PhysicsMaterial_ok0fn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enviroment/RightWall"]
+shape = SubResource("WorldBoundaryShape2D_jy31i")
+
+[node name="Ceiling" type="StaticBody2D" parent="Enviroment"]
+position = Vector2(0, -121)
+physics_material_override = SubResource("PhysicsMaterial_ok0fn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enviroment/Ceiling"]
+shape = SubResource("WorldBoundaryShape2D_ogvfb")
+
+[node name="Background" type="Sprite2D" parent="Enviroment"]
+texture = ExtResource("1_42j2x")
+
+[node name="BlueSpawn" type="Marker2D" parent="Enviroment"]
+position = Vector2(-82, 0)
+
+[node name="RedSpawn" type="Marker2D" parent="Enviroment"]
+position = Vector2(70, 0)
+
+[node name="PlayersBoundaries" type="StaticBody2D" parent="Enviroment"]
+position = Vector2(0, -65)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enviroment/PlayersBoundaries"]
+shape = SubResource("RectangleShape2D_35xsv")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+process_mode = 1
+z_index = 5
+zoom = Vector2(2.88, 2.7)
+
+[node name="RedPlayer" parent="." instance=ExtResource("2_uxmqi")]
+process_mode = 1
+position = Vector2(-137, 41)
+player_sprite = ExtResource("3_lvkno")
+
+[node name="BluePlayer" parent="." instance=ExtResource("2_uxmqi")]
+process_mode = 1
+position = Vector2(140, 41)
+player = 1
+player_sprite = ExtResource("3_ilb7t")

@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgbno3bx0wafk"]
+
+[ext_resource type="Script" path="res://Scripts/score_ui.gd" id="1_dides"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kuybt"]
+line_spacing = 2.08165e-12
+font_size = 80
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[node name="ScoreUI" type="Control" node_paths=PackedStringArray("blue_label", "red_label")]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+script = ExtResource("1_dides")
+blue_label = NodePath("BlueContainer/BlueScore")
+red_label = NodePath("RedContainer/RedScore")
+
+[node name="BlueContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 118.0
+offset_bottom = 137.0
+
+[node name="BlueScore" type="Label" parent="BlueContainer"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_kuybt")
+
+[node name="RedContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -57.0
+offset_bottom = 137.0
+grow_horizontal = 0
+
+[node name="RedScore" type="Label" parent="RedContainer"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_kuybt")
+horizontal_alignment = 2
