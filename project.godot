@@ -58,6 +58,14 @@ Pause={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Ground"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Ball"
+2d_physics/layer_4="Players Only"
+2d_physics/layer_5="Ground Only"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

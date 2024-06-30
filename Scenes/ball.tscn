@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://n78iludaw4jx"]
+[gd_scene load_steps=7 format=3 uid="uid://n78iludaw4jx"]
 
 [ext_resource type="Texture2D" uid="uid://rgk8fajbqrjl" path="res://Assets/ball.png" id="1_7o4ir"]
 [ext_resource type="Script" path="res://Scripts/ball.gd" id="1_m7vcl"]
+[ext_resource type="AudioStream" uid="uid://dy7o80esbfxti" path="res://Assets/Sounds/ball.mp3" id="3_yw1mp"]
+[ext_resource type="AudioStream" uid="uid://cv1emasjd8wyx" path="res://Assets/Sounds/whistle.mp3" id="4_u26sb"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_t7b1c"]
 friction = 0.0
@@ -10,18 +12,29 @@ bounce = 0.3
 [sub_resource type="CircleShape2D" id="CircleShape2D_ki01u"]
 radius = 15.0
 
-[node name="Ball" type="RigidBody2D"]
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("whistle_sfx")]
 z_index = 1
+collision_layer = 4
+collision_mask = 3
 mass = 0.05
 physics_material_override = SubResource("PhysicsMaterial_t7b1c")
 max_contacts_reported = 5
 contact_monitor = true
 script = ExtResource("1_m7vcl")
+whistle_sfx = NodePath("WhistleSFX")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_7o4ir")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ki01u")
+
+[node name="BounceSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_yw1mp")
+bus = &"SFX"
+
+[node name="WhistleSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_u26sb")
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

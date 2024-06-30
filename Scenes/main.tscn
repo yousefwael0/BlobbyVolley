@@ -54,6 +54,8 @@ process_mode = 1
 
 [node name="RedGround" type="StaticBody2D" parent="Enviroment"]
 position = Vector2(103, 121)
+collision_layer = 17
+collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_ok0fn")
 script = ExtResource("2_rqcd1")
 player = 1
@@ -64,6 +66,8 @@ shape = SubResource("RectangleShape2D_qm12s")
 
 [node name="BlueGround" type="StaticBody2D" parent="Enviroment"]
 position = Vector2(-102, 121)
+collision_layer = 17
+collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_ok0fn")
 script = ExtResource("2_rqcd1")
 
@@ -71,6 +75,8 @@ script = ExtResource("2_rqcd1")
 shape = SubResource("RectangleShape2D_ptpie")
 
 [node name="Net" type="StaticBody2D" parent="Enviroment"]
+collision_layer = 17
+collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_ok0fn")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Enviroment/Net"]
@@ -78,6 +84,8 @@ position = Vector2(0, 56)
 shape = SubResource("RectangleShape2D_ppsgd")
 
 [node name="LeftWall" type="StaticBody2D" parent="Enviroment"]
+collision_layer = 17
+collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_ok0fn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enviroment/LeftWall"]
@@ -86,6 +94,8 @@ shape = SubResource("WorldBoundaryShape2D_d64ev")
 
 [node name="RightWall" type="StaticBody2D" parent="Enviroment"]
 position = Vector2(202, 0)
+collision_layer = 17
+collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_ok0fn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enviroment/RightWall"]
@@ -93,6 +103,8 @@ shape = SubResource("WorldBoundaryShape2D_jy31i")
 
 [node name="Ceiling" type="StaticBody2D" parent="Enviroment"]
 position = Vector2(0, -121)
+collision_layer = 17
+collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_ok0fn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enviroment/Ceiling"]
@@ -109,7 +121,7 @@ position = Vector2(70, 0)
 
 [node name="PlayersBoundaries" type="StaticBody2D" parent="Enviroment"]
 position = Vector2(0, -65)
-collision_layer = 2
+collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enviroment/PlayersBoundaries"]

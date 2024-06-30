@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cy665aspnmmio"]
+[gd_scene load_steps=5 format=3 uid="uid://cy665aspnmmio"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_ktfs1"]
 [ext_resource type="Texture2D" uid="uid://dk8ihfgdd7p8h" path="res://Assets/RedPlayer.png" id="1_vng3y"]
@@ -7,17 +7,13 @@
 friction = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5og5u"]
-radius = 20.0
+radius = 26.0
 height = 64.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_chonp"]
-radius = 3.0
-height = 20.0
 
 [node name="Player" type="RigidBody2D"]
 z_index = 1
-collision_layer = 3
-collision_mask = 3
+collision_layer = 2
+collision_mask = 15
 mass = 0.2
 physics_material_override = SubResource("PhysicsMaterial_ulqe3")
 max_contacts_reported = 5
@@ -29,14 +25,6 @@ texture = ExtResource("1_vng3y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5og5u")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(-23, 8)
-shape = SubResource("CapsuleShape2D_chonp")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
-position = Vector2(23, 8)
-shape = SubResource("CapsuleShape2D_chonp")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 z_index = 1

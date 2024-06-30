@@ -28,7 +28,12 @@ func update_scores():
 	score.blue_label.text = str(blue_score)
 	score.red_label.text = str(red_score)
 
-func scored(player : Player.Controls):
+func scored(player : Player.Controls, current_ball : RigidBody2D):
+	current_ball.collision_layer = 0
+	current_ball.collision_mask = 16
+	current_ball.whistle_sfx.play()
+	await get_tree().create_timer(2.0).timeout
+	current_ball.queue_free()
 	var ball := BALL.instantiate()
 	ball.scored.connect(scored)
 	match player:
